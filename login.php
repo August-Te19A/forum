@@ -6,7 +6,6 @@
 session_start(); 
 $sql = "SELECT * FROM forumlogin";
 
-
 $servername = "localhost";
 $username = "root";
 $password = "";
