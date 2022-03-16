@@ -24,6 +24,9 @@ $conn = new mysqli($servername, $username, $password, $databas);
 
 $result = $conn->query("SELECT * FROM forumthreads");
 
+$login_success = false;
+
+
 if ($result->num_rows > 0) {  
     while($row = $result->fetch_assoc()) {
         echo '<hr><h2> <a href=topic.php?id=' . $row['id'] .'>'. $row['thr_name']. ' </a></h2>' .  'From: ' . $row['thr_creator'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 'Time: ' . $row['thr_date'];
@@ -32,6 +35,7 @@ if ($result->num_rows > 0) {
         
       }
 }
+
 
 $conn->close();
 

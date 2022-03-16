@@ -30,6 +30,10 @@ if($login_success) {
 	$_SESSION["username"] = $_POST["username"];
     echo "login success";
 }
+else{
+	echo "login failed";
+	
+}
 
 
 
