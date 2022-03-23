@@ -14,6 +14,8 @@
 </html>
 
 <?php
+session_start();
+
 
 $servername = "localhost";
 $username = "root";
@@ -24,8 +26,9 @@ $conn = new mysqli($servername, $username, $password, $databas);
 
 $result = $conn->query("SELECT * FROM forumthreads");
 
-$login_success = false;
 
+$login_success = false;
+$_SESSION["login"] = FALSE;
 
 if ($result->num_rows > 0) {  
     while($row = $result->fetch_assoc()) {
@@ -34,6 +37,12 @@ if ($result->num_rows > 0) {
         echo "<input type='hidden' name='topicid' value='$topicid'>";
         
       }
+}
+if ($_SESSION["login"] = FALSE){
+  echo "login true";
+}
+else{
+  echo "login false";
 }
 
 
