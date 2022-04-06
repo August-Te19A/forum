@@ -23,9 +23,9 @@ if ($result->num_rows == 0) {
   }
 
 $thread = $result->fetch_assoc();
-echo "<h2>".  $thread['thr_name'] ."</h2>";
+echo "<h2>".  $thread['thread_topic'] ."</h2>";
 
-$sql = $conn->prepare("SELECT * FROM forumtopic WHERE id=?");
+$sql = $conn->prepare("SELECT * FROM forumtopics WHERE id=?");
 $sql->bind_param("s", $id);
 $sql->execute();
 $result = $sql->get_result();
@@ -34,7 +34,7 @@ $result = $sql->get_result();
 
 if ($result->num_rows > 0) { 
     while($row = $result->fetch_assoc()) {
-        echo '<hr> '. 'From: ' . $row['UserID'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 'Time: ' . $row['date'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $row['comment'];
+        echo '<hr> '. 'From: ' . $row['topic_username'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 'Time: ' . $row['topic_date'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $row['topic_comment'];
         $topicid = $row["id"];
         echo "<input type='hidden' name='topicid' value='$topicid'>";
         

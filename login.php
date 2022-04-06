@@ -8,7 +8,7 @@
 
 <?php 
 session_start(); 
-$sql = "SELECT * FROM forumlogin";
+$sql = "SELECT * FROM forumaccounts";
 
 $servername = "localhost";
 $username = "root";
@@ -23,8 +23,8 @@ $login_success = false;
 $full_name = "";
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-		if($row["UserID"] == $_POST["username"] &&
-					$row["PASSWORD"] == $_POST["password"]) {
+		if($row["username"] == $_POST["username"] &&
+					$row["password"] == $_POST["password"]) {
 			$login_success = true;
 		}	
 	}

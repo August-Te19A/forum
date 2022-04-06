@@ -8,7 +8,7 @@ $conn = new mysqli($servername, $username, $password, $databas);
 
 
 if (isset($_POST["username"])){
-    $sql =  $conn->prepare("INSERT INTO forumlogin (UserID, PASSWORD) VALUES (?, ?)");
+    $sql =  $conn->prepare("INSERT INTO forumaccounts (username, password) VALUES (?, ?)");
     $sql->bind_param("ss", $_POST['username'], $_POST['password']);
     $sql->execute();
 }

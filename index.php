@@ -32,7 +32,7 @@ $_SESSION["login"] = FALSE;
 
 if ($result->num_rows > 0) {  
     while($row = $result->fetch_assoc()) {
-        echo '<hr><h2> <a href=topic.php?id=' . $row['id'] .'>'. $row['thr_name']. ' </a></h2>' .  'From: ' . $row['thr_creator'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 'Time: ' . $row['thr_date'];
+        echo '<hr><h2> <a href=topic.php?id=' . $row['id'] .'>'. $row['thread_topic']. ' </a></h2>' .  'From: ' . $row['thread_username'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 'Time: ' . $row['thread_date'];
         $topicid = $row["id"];
         echo "<input type='hidden' name='topicid' value='$topicid'>";
         
