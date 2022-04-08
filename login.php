@@ -7,8 +7,9 @@
 </html>
 
 <?php 
-session_start(); 
 $sql = "SELECT * FROM forumaccounts";
+
+require_once "session.php";
 
 $servername = "localhost";
 $username = "root";
@@ -18,7 +19,7 @@ $databas = "webbserverprogramering";
 $conn = new mysqli($servername, $username, $password, $databas);
 $result = $conn->query($sql);
 
-$_SESSION["login"] = FALSE;
+
 $login_success = false;
 $full_name = "";
 if ($result->num_rows > 0) {
@@ -32,11 +33,15 @@ if ($result->num_rows > 0) {
 
 if($login_success) {
 	$_SESSION["username"] = $_POST["username"];
-    $_SESSION["login"] = TRUE;
+    $_SESSION["username"] = TRUE;
+	header("location: dashboard.php");
 	echo "login success \n";
-	echo("<button onclick=\"location.href='index.php'\">Startpage</button>");
+	
+	echo("<button onclick=\"location.href='index.php'\">Startpage</button>"); //ta bort 
+	exit;
 }
 else{
+	$_SESSION["username"] = null;
 	echo "login failed \n ";
 	echo("<button onclick=\"location.href='login.html'\">Login again</button>");
 }

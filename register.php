@@ -1,4 +1,6 @@
 <?php
+require_once "session.php";
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -11,6 +13,10 @@ if (isset($_POST["username"])){
     $sql =  $conn->prepare("INSERT INTO forumaccounts (username, password) VALUES (?, ?)");
     $sql->bind_param("ss", $_POST['username'], $_POST['password']);
     $sql->execute();
+    $_SESSION['username'] = $_POST['username'];
+    $_SESSION["username"] = TRUE;
+    header("location: dashboard.php");
+
 }
 
 echo "<h2>Register success</h2>";
