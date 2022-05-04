@@ -10,6 +10,7 @@
     <p>Hejsan och välkommen</p>
     <button onclick="window.location.href='login.html'">Login</button>
     <button onclick="window.location.href='register.html'">Register</button>
+
   </body>
 </html>
 
@@ -25,6 +26,16 @@ $databas = "webbserverprogramering";
 $conn = new mysqli($servername, $username, $password, $databas);
 
 $result = $conn->query("SELECT * FROM forumthreads");
+
+
+
+//kollar om man är inloggad 
+if (isset($_SESSION["username"])){
+
+  echo $_SESSION["username"];
+  echo "<a href='logout.php' class='btn btn-secondary btn-lg active' role='button' aria-pressed='true'>Logout</a>\n";
+
+} 
 
 
 if ($result->num_rows > 0) {  

@@ -21,6 +21,8 @@ $result = $conn->query($sql);
 
 
 $login_success = false;
+$_SESSION["login_success"] = $login_success;
+
 $full_name = "";
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -33,11 +35,9 @@ if ($result->num_rows > 0) {
 
 if($login_success) {
 	$_SESSION["username"] = $_POST["username"];
-    $_SESSION["username"] = TRUE;
-	header("location: dashboard.php");
-	echo "login success \n";
-	
-	echo("<button onclick=\"location.href='index.php'\">Startpage</button>"); //ta bort 
+
+	header("location: index.php");
+
 	exit;
 }
 else{

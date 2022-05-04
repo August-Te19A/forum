@@ -12,6 +12,13 @@ if (!isset($_GET["id"])){
 }
 $id = $_GET["id"];
 
+session_start();
+
+//kollar om man är inloggad 
+if (isset($_SESSION["username"])){
+    echo "kdsjfskjfjf";
+  } 
+
 
 $sql = $conn->prepare("SELECT * FROM forumthreads WHERE id=?");
 $sql->bind_param("s", $id);

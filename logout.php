@@ -3,7 +3,7 @@
 session_start();
 
 if (session_destroy()){
-    header("location: dashboard.php");
+    header("location: index.php");
     exit;
 }
 ?>
