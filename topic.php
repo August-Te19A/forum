@@ -1,3 +1,9 @@
+<html>
+  <head>
+  <link rel="stylesheet" href= "index.css">
+  </head>
+</html>
+
 <?php
 
 $servername = "localhost";
@@ -25,13 +31,15 @@ if ($result->num_rows == 0) {
 
 $thread = $result->fetch_assoc();
 echo "<h2>".  $thread['thread_topic'] ."</h2>";
+echo "Created by: ". $thread['thread_username'] . '<br> Date: ' . $thread['thread_date']. '<br>';
+echo "<button onclick=window.location.assign('index.php')> Back </button>";
 
 //kollar om man är inloggad 
 if (isset($_SESSION["username"])){
-  echo "<form method='post'>Question<input type='text' name='question' id='question' /><br /><input type='submit' value='Submit' name='submit' /></form>";
+  echo "<form method='post'><hr>Reply<br><textarea cols='50' rows='6' type='text' name='question' id='question' /></textarea><br><input type='submit' value='Submit' name='submit' /></form>";
   if (isset($_POST['submit'])){
     $sql =  $conn->prepare("INSERT INTO forumtopics (topic_username, topic_date, topic_comment, id) VALUES (?, ?, ?, ?)");
-    $sql->bind_param("ssss", $_SESSION['username'], $_POST['thread_date'], $_POST['question'], $id);
+    $sql->bind_param("ssss", $_SESSION['username'], $_POST['thread_date'], htmlspecialchars($_POST['question']), $id);
     $sql->execute();
     header("Refresh:0");
 }
@@ -46,14 +54,13 @@ $result = $sql->get_result();
 //skriver ut medelanden
 if ($result->num_rows > 0) { 
     while($row = $result->fetch_assoc()) {
-        echo '<hr> '. 'From: ' . $row['topic_username'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 'Time: ' . $row['topic_date'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $row['topic_comment'];
+        echo "<hr><a href=profile.php?name=" . $row['topic_username'] .'><br>' . $row['topic_username'] . '</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <br>Time: ' . $row['topic_date'] ."<br><br>". $row['topic_comment'];
         $topicid = $row["id"];
         echo "<input type='hidden' name='topicid' value='$topicid'>";
-        
       }
 }
 else{
-    echo "no posts yet";
+    echo "<hr> no posts yet";
 }
 
 $conn->close();

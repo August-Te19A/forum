@@ -41,7 +41,7 @@ if(mysqli_num_rows($select)) {
 //gör en profil 
 else if (isset($_POST["username"])){
     $sql =  $conn->prepare("INSERT INTO forumaccounts (username, password) VALUES (?, ?)");
-    $sql->bind_param("ss", $_POST['username'], password_hash($_POST['password'], PASSWORD_DEFAULT));
+    $sql->bind_param("ss", htmlspecialchars($_POST['username']), password_hash($_POST['password'], PASSWORD_DEFAULT));
     $sql->execute();
     $_SESSION['username'] = $_POST['username'];
     header("location: index.php");

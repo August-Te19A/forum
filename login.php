@@ -40,9 +40,6 @@ if (!isset($_POST['username'])){
 
 $login_success = false;
 
-
-$full_name = "";
-
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 		if($row["username"] == $_POST["username"] && password_verify($_POST["password"], $row["password"])) {
