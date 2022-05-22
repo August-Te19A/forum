@@ -4,7 +4,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forum</title>
-    <link rel="stylesheet" href= "index.css">
   </head>
   <body>
     <h1>Forum</h1>
@@ -31,8 +30,8 @@ if (!isset($_SESSION["username"])){
 
 //kollar om man är inloggad 
 if (isset($_SESSION["username"])){
-  echo "<a href=profile.php?name=" . $_SESSION['username'] .">" . $_SESSION['username']. "</a>\n"; 
-  echo "<a href='logout.php' class='btn btn-secondary btn-lg active' role='button' aria-pressed='true'>Logout</a>\n";
+  echo "<a href=profile.php?name=" . $_SESSION['username'] .">" . $_SESSION['username']. "</a>"; 
+  echo "<br><button onclick=window.location.assign('logout.php')>Logout</button>";
   echo "<form action='index.php' method='post'><br>Topic <br><textarea cols='50' rows='1' name='name' id='name' ></textarea><br/>Question<br><textarea cols='50' rows='6' name='topic' id='topic' /></textarea><br><input type='submit' value='Submit' name='submit' /></form>";
   //kollar om man skickar något man har skrivit
   if (isset($_POST['submit'])){
@@ -51,7 +50,7 @@ if (isset($_SESSION["username"])){
 //skriver ut alla trådar 
 if ($result->num_rows > 0) {  
     while($row = $result->fetch_assoc()) {
-        echo '<hr><h2> <a href=topic.php?id=' . $row['id'] .'>'. $row['thread_topic']. " </a></h2>  From:  <a href=profile.php?name=" . $row['thread_username'] . ">" . $row['thread_username'] . '</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Time: ' . $row['thread_date'];
+        echo '<hr><h2> <a href=topic.php?id=' . $row['id'] .'>'. htmlspecialchars($row['thread_topic']). " </a></h2>  From:  <a href=profile.php?name=" . htmlspecialchars($row['thread_username']) . ">" . htmlspecialchars($row['thread_username']) . '</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Time: ' . $row['thread_date'];
         $topicid = $row["id"];
         echo "<input type='hidden' name='topicid' value='$topicid'>";
       }

@@ -47,7 +47,6 @@ else if (isset($_POST["username"])){
     header("location: index.php");
 }
 
-
 $conn->close();
 
 ?>

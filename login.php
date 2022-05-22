@@ -8,15 +8,6 @@
   </head>
 <body>
 <h1>Login to forum</h1>
-    <form action="login.php" method="post" id="loginform">
-      Username:<br />
-      <input type="text" name="username" />
-      <br />
-      Password:<br />
-      <input type="password" name="password" />
-      <br />
-      <input type="submit" value="Submit" />
-    </form>
 </body>
 </html>
 
@@ -32,6 +23,17 @@ $databas = "webbserverprogramering";
 
 $conn = new mysqli($servername, $username, $password, $databas);
 $result = $conn->query($sql);
+
+echo "<form action='login.php' method='post' id='loginform'>
+Username:<br />
+<input type='text' name='username' />
+<br />
+Password:<br />
+<input type='password' name='password' />
+<br />
+<input type='submit' value='Submit' />
+</form>
+<button onclick=window.location.assign('index.php')> Back </button>";
 
 //kollar om username är satt annars kör den inte resterande kod
 if (!isset($_POST['username'])){
